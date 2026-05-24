@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录态读取器</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <div class="brand">
+          <div class="brand-icon" aria-hidden="true">
+            <span></span>
+          </div>
+          <div>
+            <h1>登录态读取器</h1>
+            <p id="pageUrl" class="url">正在读取当前标签页...</p>
+          </div>
+        </div>
+        <button id="refreshBtn" class="icon-btn" type="button" title="重新读取" aria-label="重新读取">
+          <span aria-hidden="true">↻</span>
+        </button>
+      </header>
+
+      <section class="mode-switch" aria-label="读取模式">
+        <span id="modeSlider" class="mode-slider" aria-hidden="true"></span>
+        <button class="mode-btn active" data-mode="cookies" type="button">Cookie 读取</button>
+        <button class="mode-btn" data-mode="playwright" type="button">Playwright 登录态</button>
+      </section>
+
+      <section class="summary" aria-label="读取结果">
+        <div>
+          <strong id="cookieCount">0</strong>
+          <span>Cookie</span>
+        </div>
+        <div>
+          <strong id="storageCount">0</strong>
+          <span>localStorage</span>
+        </div>
+        <div>
+          <strong id="originCount">0</strong>
+          <span>Origin</span>
+        </div>
+      </section>
+
+      <section id="cookiePanel" class="panel active" aria-label="Cookie 读取">
+        <div class="toolbar">
+          <button id="copyCookieJsonBtn" type="button">复制 Cookie JSON</button>
+          <button id="copyHeaderBtn" type="button">复制 Cookie Header</button>
+        </div>
+        <section id="cookieList" class="cookie-list" aria-label="Cookie 列表"></section>
+      </section>
+
+      <section id="playwrightPanel" class="panel" aria-label="Playwright 登录态">
+        <div class="playwright-box">
+          <h2>Playwright storage_state</h2>
+          <p>复制后可粘贴保存为 login.json，或直接在脚本中作为 storage_state 内容使用。</p>
+          <button id="copyPlaywrightBtn" class="primary-action" type="button">复制 Playwright 登录态</button>
+        </div>
+        <pre id="playwrightPreview" class="preview" aria-label="Playwright 预览"></pre>
+      </section>
+
+      <div id="status" class="status" role="status"></div>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
